@@ -1,0 +1,62 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>BioBuzzStarterbotAuto flowchart</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  body { width: 672px; height: 785px; position: relative; overflow: hidden;
+         font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color: #111; }
+  h1 { position: absolute; left: 21px; top: 12px; margin: 0; font-size: 13.5px; font-weight: 600; }
+  .sub { position: absolute; left: 21px; top: 36px; font-size: 10.5px; color: #555; }
+  .box { position: absolute; left: 32px; width: 354px; height: 64px; box-sizing: border-box;
+         border: 1px solid #c9c9c3; border-radius: 6px; background: #fff; padding: 9px 14px 0 14px; }
+  .box.dashed { border-style: dashed; }
+  .box b { display: block; font-size: 11.5px; font-weight: 600; margin-bottom: 2px; }
+  .box .main { font-size: 11.5px; }
+  .box .ends { font-size: 10px; color: #555; margin-top: 2px; }
+  .label { position: absolute; font-size: 10px; color: #555; line-height: 14px; }
+  svg { position: absolute; left: 0; top: 0; }
+</style></head>
+<body>
+  <h1>BioBuzzStarterbotAuto shoots first, then drives under the hive and parks</h1>
+  <div class="sub">Measured route from the blue base; red mirrors the turn</div>
+
+  <div class="box" style="top:63px"><b>INIT</b><div class="main">Pick the alliance: B = red, X = blue</div>
+    <div class="ends">Hand check and Motors lines on screen; heading set to 0 at START</div></div>
+  <div class="box" style="top:155px"><b>SPIN_UP</b><div class="main">Launcher speeds up to 1250 ticks/s</div>
+    <div class="ends">Ends: above 1200 ticks/s for 0.3 s</div></div>
+  <div class="box" style="top:247px"><b>SHOOT</b><div class="main">Windmill + intake feed; pauses below 1200 ticks/s</div>
+    <div class="ends">Ends: 4 s fed, 10 s in this step, or 17 s on the clock</div></div>
+  <div class="box" style="top:339px"><b>LEAVE</b><div class="main">Drive 2540 mm (8 ft 4 in) toward and under the hive</div>
+    <div class="ends">IMU keeps it straight. Ends: within 10 mm for 0.25 s, or on timeout</div></div>
+  <div class="box" style="top:431px"><b>TURN_TO_PARK</b><div class="main">Blue: turn left to +90&deg; with the IMU (red: -90&deg;)</div>
+    <div class="ends">Ends: within 2&deg; for 0.25 s, or after 3 s</div></div>
+  <div class="box" style="top:523px"><b>TO_PARK</b><div class="main">Drive 914 mm (3 ft) on to the blue tape</div>
+    <div class="ends">IMU keeps it straight. Ends: within 10 mm for 0.25 s, or on timeout</div></div>
+  <div class="box dashed" style="top:615px"><b>FINAL_TURN</b><div class="main">Optional turn to FINAL_HEADING_DEG</div>
+    <div class="ends">Skipped now: it equals the park heading</div></div>
+  <div class="box" style="top:707px; height:50px"><b>DONE</b><div class="main">Motors stopped; telemetry and the Events list stay on screen</div></div>
+
+  <div class="label" style="left:218px; top:134px">START pressed</div>
+  <div class="label" style="left:432px; top:255px">never at speed within 4 s:<br>skip shooting, go to LEAVE</div>
+  <div class="label" style="left:432px; top:573px">turned 30&deg; the wrong way:<br>stop with a warning</div>
+
+  <svg width="672" height="785" viewBox="0 0 672 785">
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#b9b9b2"/>
+      </marker>
+    </defs>
+    <g stroke="#c9c9c3" stroke-width="1.2" fill="none">
+      <line x1="209" y1="127" x2="209" y2="154" marker-end="url(#a)"/>
+      <line x1="209" y1="219" x2="209" y2="246" marker-end="url(#a)"/>
+      <line x1="209" y1="311" x2="209" y2="338" marker-end="url(#a)"/>
+      <line x1="209" y1="403" x2="209" y2="430" marker-end="url(#a)"/>
+      <line x1="209" y1="495" x2="209" y2="522" marker-end="url(#a)"/>
+      <line x1="209" y1="587" x2="209" y2="614" marker-end="url(#a)"/>
+      <line x1="209" y1="679" x2="209" y2="706" marker-end="url(#a)"/>
+      <!-- SPIN_UP -> LEAVE -->
+      <polyline points="386,187 421,187 421,371 387,371" marker-end="url(#a)"/>
+      <!-- TURN_TO_PARK -> DONE -->
+      <polyline points="386,463 421,463 421,732 387,732" marker-end="url(#a)"/>
+    </g>
+  </svg>
+</body></html>
