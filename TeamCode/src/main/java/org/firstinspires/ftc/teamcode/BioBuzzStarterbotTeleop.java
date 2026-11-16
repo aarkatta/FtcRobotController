@@ -72,8 +72,8 @@ public class BioBuzzStarterbotTeleop extends OpMode {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    public final int LAUNCHER_TARGET_VELOCITY = 1250;
-    public final int LAUNCHER_MIN_VELOCITY = 1200;
+    public final int LAUNCHER_TARGET_VELOCITY = 1310;
+    public final int LAUNCHER_MIN_VELOCITY = 1260;
 
     // Same as BioBuzzStarterbotAuto / ShooterAutoTest / ShooterTest / HardwareTest (verified on the robot).
     // If the intake or launcher spins the wrong way, flip it here AND in those files.
@@ -81,6 +81,11 @@ public class BioBuzzStarterbotTeleop extends OpMode {
     // which way the triggers move balls (right trigger = in, left trigger = out).
     final DcMotorSimple.Direction INTAKE_DIRECTION = DcMotorSimple.Direction.REVERSE;
     final DcMotorSimple.Direction LAUNCHER_DIRECTION = DcMotorSimple.Direction.REVERSE;
+
+    // Drive speed: stick input is multiplied by this before it goes to the drive motors, so the robot
+    // reaches full speed at 1/3 stick (3x faster response). Anything above full power is clipped.
+    // Lower it toward 1.0 to get back to normal speed.
+    final double DRIVE_SPEED_MULTIPLIER = 3.0;
 
     /*
      * These two variables store the power we need to apply to the motors. In other cases, we may
@@ -203,6 +208,8 @@ public class BioBuzzStarterbotTeleop extends OpMode {
          * both motors work to rotate the robot. Combinations of these inputs can be used to create
          * more complex maneuvers.
          */
+        // FTC sticks read negative when pushed up/left, so negate Y for forward. Push up = forward,
+        // push right = turn right.
         arcadeDrive(-gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         /*
@@ -252,8 +259,14 @@ public class BioBuzzStarterbotTeleop extends OpMode {
     }
 
     void arcadeDrive(double forward, double rotate) {
-        leftPower = forward + rotate;
-        rightPower = forward - rotate;
+        leftPower = (forward + rotate) * DRIVE_SPEED_MULTIPLIER;
+        rightPower = (forward - rotate) * DRIVE_SPEED_MULTIPLIER;
+
+        // Motor power can't exceed 1. If the scaled value goes over, shrink both sides by the
+        // same amount so the forward/turn mix stays the same.
+        double largest = Math.max(1.0, Math.max(Math.abs(leftPower), Math.abs(rightPower)));
+        leftPower /= largest;
+        rightPower /= largest;
 
         /*
          * Send calculated power to motors

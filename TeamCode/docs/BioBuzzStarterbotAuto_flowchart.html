@@ -17,17 +17,17 @@
 </style></head>
 <body>
   <h1>BioBuzzStarterbotAuto shoots first, then drives under the hive and parks</h1>
-  <div class="sub">Measured route from the blue base; red mirrors the turn</div>
+  <div class="sub">Measured route from the blue base; red and blue both turn left</div>
 
-  <div class="box" style="top:63px"><b>INIT</b><div class="main">Pick the alliance: B = red, X = blue</div>
+  <div class="box" style="top:63px"><b>INIT</b><div class="main">Find every device; same route for red and blue</div>
     <div class="ends">Hand check and Motors lines on screen; heading set to 0 at START</div></div>
-  <div class="box" style="top:155px"><b>SPIN_UP</b><div class="main">Launcher speeds up to 1250 ticks/s</div>
-    <div class="ends">Ends: above 1200 ticks/s for 0.3 s</div></div>
-  <div class="box" style="top:247px"><b>SHOOT</b><div class="main">Windmill + intake feed; pauses below 1200 ticks/s</div>
+  <div class="box" style="top:155px"><b>SPIN_UP</b><div class="main">Launcher speeds up to 1210 ticks/s</div>
+    <div class="ends">Ends: above 1160 ticks/s for 0.3 s</div></div>
+  <div class="box" style="top:247px"><b>SHOOT</b><div class="main">Windmill + intake feed; pauses below 1160 ticks/s</div>
     <div class="ends">Ends: 4 s fed, 10 s in this step, or 17 s on the clock</div></div>
-  <div class="box" style="top:339px"><b>LEAVE</b><div class="main">Drive 2540 mm (8 ft 4 in) toward and under the hive</div>
+  <div class="box" style="top:339px"><b>LEAVE</b><div class="main">Drive 2134 mm (7 ft) toward and under the hive</div>
     <div class="ends">IMU keeps it straight. Ends: within 10 mm for 0.25 s, or on timeout</div></div>
-  <div class="box" style="top:431px"><b>TURN_TO_PARK</b><div class="main">Blue: turn left to +90&deg; with the IMU (red: -90&deg;)</div>
+  <div class="box" style="top:431px"><b>TURN_TO_PARK</b><div class="main">Turn left to +90&deg; with the IMU (red and blue)</div>
     <div class="ends">Ends: within 2&deg; for 0.25 s, or after 3 s</div></div>
   <div class="box" style="top:523px"><b>TO_PARK</b><div class="main">Drive 914 mm (3 ft) on to the blue tape</div>
     <div class="ends">IMU keeps it straight. Ends: within 10 mm for 0.25 s, or on timeout</div></div>

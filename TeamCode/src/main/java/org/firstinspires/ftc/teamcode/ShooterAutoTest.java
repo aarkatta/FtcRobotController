@@ -18,13 +18,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  * !! If balls are loaded, they WILL be launched. Leave the balls out for a first test, and keep clear
  * of the launcher exit. Press STOP at any time to cut everything.
- * Values match BioBuzzStarterbotAuto (target 1250, min 1200, PIDF 40/0/0/12.5, windmill REVERSE, intake 0.5).
+ * Values match BioBuzzStarterbotAuto (target 1210, min 1160, PIDF 40/0/0/12.5, windmill REVERSE, intake 0.5).
  */
 @Autonomous(name = "ShooterAutoTest", group = "Test")
 public class ShooterAutoTest extends OpMode {
 
-    final int TARGET_VELOCITY = 1250;
-    final int MIN_VELOCITY = 1200;
+    final int TARGET_VELOCITY = 1210;
+    final int MIN_VELOCITY = 1160;
     final double SPIN_UP_TIMEOUT = 5.0;
     final double FEED_SECONDS = 3.0;
     final double FEED_INTAKE_POWER = 0.5;

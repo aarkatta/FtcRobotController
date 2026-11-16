@@ -19,12 +19,12 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  *   B                     launcher reverse (clear a jam), hold
  *
  * Telemetry shows target vs actual velocity and an AT SPEED flag.
- * Values match BioBuzzStarterbotAuto (target 1250, min 1200, PIDF 40/0/0/12.5).
+ * Values match BioBuzzStarterbotAuto (target 1210, min 1160, PIDF 40/0/0/12.5).
  */
 @TeleOp(name = "ShooterTest", group = "Test")
 public class ShooterTest extends OpMode {
 
-    final int MIN_MARGIN = 50;             // "at speed" = within this of target (BioBuzzStarterbotAuto: 1250 vs 1200)
+    final int MIN_MARGIN = 50;             // "at speed" = within this of target (BioBuzzStarterbotAuto: 1210 vs 1160)
     final double FEED_INTAKE_POWER = 0.5;
 
     // Intake motor direction. If the intake spins the wrong way, flip this one line.
@@ -37,7 +37,7 @@ public class ShooterTest extends OpMode {
     DcMotor intake;
     CRServo windmill;
 
-    double target = 1250;
+    double target = 1210;
     boolean prevUp, prevDown;
 
     @Override
