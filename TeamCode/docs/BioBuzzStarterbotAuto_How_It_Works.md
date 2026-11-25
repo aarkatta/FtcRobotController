@@ -61,7 +61,7 @@ The code also skips steps on its own and writes `skip <step>: <reason>` to Event
 
 Only the drive motors are required; every other device has a fallback, but shooting needs all three shooter devices.
 
-**Four-wheel (mecanum) drive:** the config names are `left_front_drive`, `left_back_drive`, `right_front_drive` and `right_back_drive`. The table below still shows the two-wheel names (`left_drive` and `right_drive`) until the code is updated to use the four-wheel names.
+**Four-wheel (mecanum) drive:** the config names are `frontLeft`, `backLeft`, `frontRight` and `backRight`. The table below still shows the two-wheel names (`left_drive` and `right_drive`) until the code is updated to use the four-wheel names.
 
 | Name | Configuration type | Needed? | If it's missing or wrong |
 | --- | --- | --- | --- |
